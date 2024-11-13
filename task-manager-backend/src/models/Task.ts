@@ -1,40 +1,41 @@
-import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/database';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  AutoIncrement,
+  PrimaryKey,
+  AllowNull,
+} from 'sequelize-typescript';
 
+@Table({
+  tableName: 'tasks',
+  timestamps: false,
+})
 class Task extends Model {
-  public id!: number;
-  public title!: number;
-  public description!: string;
-  public completed!: boolean;
+  @Column({
+    type: DataType.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  })
+  declare id: number;
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  title!: string;
+
+  @Column({
+    type: DataType.TEXT,
+    allowNull: false,
+  })
+  description!: string;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  })
+  completed!: boolean;
 }
-
-Task.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
-    completed: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
-  },
-  {
-    sequelize,
-    tableName: 'tasks',
-  }
-);
-
-export default Task;
