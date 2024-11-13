@@ -39,3 +39,5 @@ class Task extends Model {
   })
   completed!: boolean;
 }
+
+export default Task;
