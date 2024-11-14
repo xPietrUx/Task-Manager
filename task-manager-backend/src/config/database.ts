@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
+import Task from '../models/Task';
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const sequelize = new Sequelize({
   port: Number(process.env.DB_PORT),
   dialect: 'postgres',
   logging: false,
+  models: [Task],
 });
 
 export default sequelize;
