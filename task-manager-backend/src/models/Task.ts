@@ -13,31 +13,25 @@ import {
   timestamps: false,
 })
 class Task extends Model {
-  @Column({
-    type: DataType.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  })
+  @AutoIncrement
+  @PrimaryKey
+  @Column(DataType.INTEGER)
   declare id: number;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  title!: string;
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  declare title: string;
 
-  @Column({
-    type: DataType.TEXT,
-    allowNull: false,
-  })
-  description!: string;
+  @AllowNull(false)
+  @Column(DataType.TEXT)
+  declare description: string;
 
+  @AllowNull(false)
   @Column({
     type: DataType.BOOLEAN,
-    allowNull: false,
     defaultValue: false,
   })
-  completed!: boolean;
+  declare completed: boolean;
 }
 
 export default Task;
