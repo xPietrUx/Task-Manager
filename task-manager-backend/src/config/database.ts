@@ -15,4 +15,18 @@ const sequelize = new Sequelize({
   models: [Task],
 });
 
+export const initializeDatabase = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connecting to a related database');
+
+    await sequelize.sync({ force: true });
+    console.log('Model synchronized with the database.');
+
+    return sequelize;
+  } catch (error) {
+    console.error('Error initializing database: ', error);
+  }
+};
+
 export default sequelize;
